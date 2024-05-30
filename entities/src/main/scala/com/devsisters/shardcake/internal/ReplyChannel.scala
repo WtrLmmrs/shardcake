@@ -31,7 +31,10 @@ private[shardcake] object ReplyChannel {
     def fail(cause: Cause[Throwable]): UIO[Unit]                   = promise.failCause(cause).unit
     def replySingle(a: A): UIO[Unit]                               = promise.succeed(Some(a)).unit
     def replyStream(stream: ZStream[Any, Throwable, A]): UIO[Unit] =
-      stream.runHead.flatMap(promise.succeed(_)).catchAllCause(fail).fork.unit
+      stream.runHead.flatMap[Any, Throwable, Boolean](promise.succeed(_))
+        .catchAllCause[Any, Nothing, AnyVal](fail)
+        .fork.unit
+
     val output: Task[Option[A]]                                    = promise.await.onError(fail)
   }
 
