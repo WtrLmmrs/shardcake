@@ -317,7 +317,9 @@ object ShardManager {
   ): (Map[PodAddress, Set[ShardId]], Map[PodAddress, Set[ShardId]]) = {
     val (_, assignments)    = shardsToRebalance.foldLeft((state.shardsPerPod, List.empty[(ShardId, PodAddress)])) {
       case ((shardsPerPod, assignments), shard) =>
-        val unassignedPods = assignments.flatMap { case (shard, _) => state.shards.get(shard).flatten[PodAddress] }.toSet
+        val unassignedPods = assignments.flatMap { case (shard, _) =>
+          state.shards.get(shard).flatten[PodAddress]
+        }.toSet
         // find pod with least amount of shards
         shardsPerPod
           // keep only pods with the max version

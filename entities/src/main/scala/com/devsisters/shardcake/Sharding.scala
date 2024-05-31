@@ -337,7 +337,8 @@ class Sharding private (
         }
 
       def sendStream(entityId: String)(messages: ZStream[Any, Throwable, Msg]): Task[Unit] = {
-        val send = ReplyChannel.single[Unit].flatMap[Any, Throwable, Unit](sendStreamGeneric(entityId, messages, None, _))
+        val send =
+          ReplyChannel.single[Unit].flatMap[Any, Throwable, Unit](sendStreamGeneric(entityId, messages, None, _))
         timeout.fold(send)(t => send.timeout(t).unit)
       }
 
