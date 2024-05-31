@@ -71,8 +71,8 @@ lazy val core = project
   .settings(
     libraryDependencies ++=
       Seq(
-        "dev.zio" %% "zio"         % zioVersion,
-        "dev.zio" %% "zio-streams" % zioVersion,
+        "dev.zio"                %% "zio"                     % zioVersion,
+        "dev.zio"                %% "zio-streams"             % zioVersion,
         "org.scala-lang.modules" %% "scala-collection-compat" % scalaCompatVersion
       )
   )
