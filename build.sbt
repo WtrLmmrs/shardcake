@@ -19,7 +19,7 @@ val scalaCompatVersion    = "2.12.0"
 
 inThisBuild(
   List(
-    scalaVersion           := scala212,
+    scalaVersion           := scala213,
     crossScalaVersions     := allScala,
     organization           := "com.devsisters",
     homepage               := Some(url("https://devsisters.github.io/shardcake/")),

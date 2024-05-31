@@ -242,7 +242,7 @@ class Sharding private (
           (shardManager.notifyUnhealthyPod(pod) *>
             // just in case we missed the update from the pubsub, refresh assignments
             shardManager.getAssignments
-              .flatMap[Any, Throwable, Any](updateAssignments(_, fromShardManager = true))).forkDaemon
+              .flatMap[Any, Throwable, Unit](updateAssignments(_, fromShardManager = true))).forkDaemon
         )
       }
 
